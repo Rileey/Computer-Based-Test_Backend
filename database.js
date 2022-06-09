@@ -7,7 +7,7 @@ const client = new Client({
     port: 5432,
     password: 'R1leythehuman',
     connectionLimit: 10,
-    database: 'postgres'
+    database: 'cbt'
 })
 
 export default client
