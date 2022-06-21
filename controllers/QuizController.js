@@ -3,7 +3,7 @@ import client from '../database.js';
 const QuizController =  {
     createQuiz: async (req, res) => {
         try {
-            const { answer, options } = req.body;
+            const { answer, option_1, option_2, option_3, option_4, option_5 } = req.body;
             const question = req.file.path
 
             if (!req.file){
@@ -11,7 +11,7 @@ const QuizController =  {
             } 
 
             const input = {
-                answer, question, options
+                answer, question, option_1, option_2, option_3, option_4, option_5
             }
             
             // if (req.file) {
@@ -26,8 +26,8 @@ const QuizController =  {
             
 
 
-            const newQuiz = await client.query(`INSERT INTO quiz (question, answer) VALUES ($1, $2)`, [
-                input.question, input.answer
+            const newQuiz = await client.query(`INSERT INTO quiz (question, answer, option_1, option_2, option_3, option_4, option_5) VALUES ($1, $2, $3, $4, $5, $6, $7)`, [
+                input.question, input.answer, input.option_1, input.option_2, input.option_3, input.option_4, input.option_5
             ])
 
             if ( newQuiz ) {
@@ -61,7 +61,7 @@ const QuizController =  {
     updateQuiz: async (req, res) => {
         try {
             const { quiz_id } = req.params
-            const { answer, options } = req.body;
+            const { answer, option_1, option_2, option_3, option_4, option_5 } = req.body;
             if (req.file){
                 const question = req.file.path
                 await client.query('UPDATE quiz SET question = $1 WHERE quiz_id = $2', [
@@ -69,10 +69,34 @@ const QuizController =  {
                 ])    
             }
 
-            if (options) {
+            if (option_1) {
                 await client.query(
-                    "UPDATE quiz SET options = $1 WHERE quiz_id = $2",
-                    [options, quiz_id]
+                    "UPDATE quiz SET option_1 = $1 WHERE quiz_id = $2",
+                    [option_1, quiz_id]
+                )
+            }
+            if (option_2) {
+                await client.query(
+                    "UPDATE quiz SET option_2 = $1 WHERE quiz_id = $2",
+                    [option_2, quiz_id]
+                )
+            }
+            if (option_3) {
+                await client.query(
+                    "UPDATE quiz SET option_3 = $1 WHERE quiz_id = $2",
+                    [option_3, quiz_id]
+                )
+            }
+            if (option_4) {
+                await client.query(
+                    "UPDATE quiz SET option_4 = $1 WHERE quiz_id = $2",
+                    [option_4, quiz_id]
+                )
+            }
+            if (option_5) {
+                await client.query(
+                    "UPDATE quiz SET option_5 = $1 WHERE quiz_id = $2",
+                    [option_5, quiz_id]
                 )
             }
 
