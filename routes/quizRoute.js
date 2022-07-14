@@ -8,5 +8,6 @@ router.route('/quiz').post(Upload.single('question'), QuizController.createQuiz)
 router.route('/quiz').get(QuizController.getQuiz)
 router.route('/quiz/:quiz_id').get(QuizController.getOneQuiz)
 router.route('/quiz/:quiz_id').put(QuizController.updateQuiz)
+router.route('/quiz/:quiz_id').delete(QuizController.deleteQuiz)
 
 export default router
