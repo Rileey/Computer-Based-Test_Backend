@@ -3,7 +3,7 @@ import client from '../database.js';
 const QuizController =  {
     createQuiz: async (req, res) => {
         try {
-            const { answer, options } = req.body;
+            const { answer } = req.body;
             const question = req.file.path
 
             if (!req.file){
@@ -11,17 +11,9 @@ const QuizController =  {
             } 
 
             const input = {
-                answer, question, options
+                answer, question
             }
-            
-            // if (req.file) {
-            //     const question = req.file.path
-            //     input.question = question
-            // }
-
-           
-
-            console.log(question)
+            console.log(question, "Mr Omoloja")
 
             
 
@@ -39,9 +31,10 @@ const QuizController =  {
     },
 
     getQuiz: async (req, res) => {
+        
         try {
-            const subjects = await client.query("SELECT * FROM quiz");
-            res.json({data: subjects.rows})
+            const quiz = await client.query("SELECT * FROM quiz order by random() limit 10");
+            res.json({data: quiz.rows})
         } catch (err) {
             console.error(err.message)
         }
@@ -61,29 +54,19 @@ const QuizController =  {
     updateQuiz: async (req, res) => {
         try {
             const { quiz_id } = req.params
-            const { answer, options } = req.body;
+            const { answer } = req.body;
             if (req.file){
                 const question = req.file.path
                 await client.query('UPDATE quiz SET question = $1 WHERE quiz_id = $2', [
                     question, quiz_id
                 ])    
             }
-
-            if (options) {
-                await client.query(
-                    "UPDATE quiz SET options = $1 WHERE quiz_id = $2",
-                    [options, quiz_id]
-                )
-            }
-
-
             if (answer){
                 await client.query(
                     "UPDATE quiz SET answer = $1 WHERE quiz_id = $2",
                     [answer, quiz_id]
                     )
             }
-
 
                 res.status(200).json({message: 'title has been updated'})
         } catch (err) {
@@ -96,7 +79,7 @@ const QuizController =  {
             const { quiz_id } = req.params
             
            await client.query("DELETE FROM quiz WHERE quiz_id = $1", [
-                id
+                quiz_id
             ]);
             res.status(200).json({message: 'Quiz deleted'})
         } catch (err) {

@@ -1,0 +1,5 @@
+{"user_id":"3","examnumber":"23401","score":7,"percentage":100,"question1":"A","question2":"B","question3":"C","question4":"D","question5":"E","question7":"A"}
+{"user_id":"3","examnumber":"23401","score":7,"percentage":100,"question1":"A","question2":"B","question3":"C","question4":"D","question5":"E","question7":"A"}
+{"user_id":"3","examnumber":"23401","score":7,"percentage":100,"question1":"A","question2":"B","question3":"C","question4":"D","question5":"E","question7":"A","lastname":"Omoloja"}
+{"user_id":"5","examnumber":"777777","score":1,"percentage":15,"question1":"D","question2":"B","question3":"E","question4":"B","question5":"A","question7":"C","lastname":"Omolojs"}
+{"user_id":"3","examnumber":"23401","score":8,"percentage":100,"question1":"A","question2":"B","question3":"C","question4":"D","question5":"E","question7":"A","lastname":"Omoloja"}
